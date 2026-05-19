@@ -246,7 +246,7 @@ a {
 /* Columna imagen */
 .column.background-image1 {
   overflow: visible;
-  background-image: url("/img/olivia-rodrigo-desktop-wallpapers.jpg");
+  background-image: url("/img/sabrina-carpenter-3840x2160-11251.jpg");
   background-position: 100% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -256,7 +256,7 @@ a {
 
 .column.background-image2 {
   overflow: visible;
-  background-image: url("/img/anya-taylor-joy-olga-of-the-birch-forest-the-northman.jpg");
+  background-image: url("/img/olivia-rodrigo-desktop-wallpapers.jpg");
   background-position: 100% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -266,14 +266,13 @@ a {
 
 .column.background-image3 {
   overflow: visible;
-  background-image: url("/img/sabrina-carpenter-3840x2160-11251.jpg");
+  background-image: url("/img/anya-taylor-joy-olga-of-the-birch-forest-the-northman.jpg");
   background-position: 100% 50%;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   min-height: 60vh;
 }
-
 
 @media screen and (max-width: 767px) {
   .column.background-image {
