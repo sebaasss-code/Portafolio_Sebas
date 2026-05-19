@@ -344,19 +344,6 @@ a {
   }
 }
 
-/* ─── NUMBER ────────────────────────────────────────────────────── */
-.number {
-  position: relative;
-  margin-bottom: 0;
-  margin-left: 0;
-  float: none;
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-  color: grey;
-  font-size: 70px;
-  line-height: 60px;
-  font-weight: 400;
-}
-
 /* ─── PROJECT TITLE ─────────────────────────────────────────────── */
 .project-title {
   font-size: 44px;
