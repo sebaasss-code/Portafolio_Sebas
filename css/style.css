@@ -1,0 +1,460 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ─── NAVBAR ────────────────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 0;
+}
+
+.u-container-full {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: calc(100% - clamp(2rem, 5vw, 6rem));
+  max-width: 100%;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav_links_link {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 16px;
+  row-gap: 16px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.nav_links_item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-line {
+  width: 2px;
+  height: 0px;
+  background-color: white;
+  opacity: 0;
+  transition: height 0.3s ease-out, opacity 0.5s ease-out;
+}
+
+.nav_links_item:hover .label-g {
+  color: white;
+  transition: color 0.3s ease-out;
+}
+
+.nav_links_item:hover .nav-line {
+  height: 10px;
+  opacity: 1;
+}
+
+.footer_links_item:hover .nav-line{
+  height: 10px;
+  opacity: 1;
+}
+
+
+.label-g {
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.text-grey {
+  color: rgb(145, 145, 145);
+}
+
+/* ─── LAYOUT PRINCIPAL ──────────────────────────────────────────── */
+.main-content {
+  flex: 1;                
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ─── HERO (fixed, debajo del navbar) ──────────────────────────── */
+.hero {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;               /* por debajo de la sección de proyectos */
+}
+
+.wrapper-title {
+  width: 100%;
+  padding-right: 5vw;
+  padding-left: 5vw;
+}
+
+.w-h1 {
+  position: relative;
+  padding-right: 10vw;
+}
+
+.main-h1 {
+  position: relative;
+  margin-top: 5px;
+  margin-bottom: 0;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  color: white;
+  font-size: 14vh;
+  line-height: 16vh;
+  font-weight: 400;
+}
+
+.main-h1.home {
+  font-size: 25vh;
+  line-height: 22vh;
+}
+
+.home-subhead {
+  display: flex;
+  width: 30vw;
+  margin-top: 30px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.home-subhead p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgb(145, 145, 145);
+  font-weight: 400;
+}
+
+/* Flecha scroll */
+.arrow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 40px;
+  display: block;
+  margin: 0 auto;
+  width: fit-content;
+  animation: bounce 1.8s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+/* ─── HERO SPACER ───────────────────────────────────────────────── */
+/* Empuja el contenido para que aparezca después del hero al hacer scroll */
+.hero-spacer {
+  height: 100vh;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+/* ─── SECCIÓN DE PROYECTOS ──────────────────────────────────────── */
+.section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(220, 222, 224);
+  z-index: 10;              /* tapa el hero al hacer scroll */
+}
+
+.section.main {
+  flex-direction: column;
+}
+
+@media screen and (max-width: 991px) {
+  .section.main {
+    justify-content: flex-start;
+  }
+}
+
+.collection-list-wrapper {
+  width: 100%;
+}
+
+.collection-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+}
+
+/* ─── WRAPPER (fila de proyecto) ────────────────────────────────── */
+.wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: stretch;
+  background-color: white;
+}
+
+@media screen and (max-width: 991px) {
+  .wrapper {
+    flex-direction: column-reverse;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .wrapper {
+    flex: 0 0 auto;
+  }
+}
+
+/* ─── COLUMN (base) ─────────────────────────────────────────────── */
+.column {
+  overflow: hidden;
+  flex: 1 1 0%;
+}
+
+/* Columna imagen */
+.column.background-image1 {
+  overflow: visible;
+  background-image: url("/img/olivia-rodrigo-desktop-wallpapers.jpg");
+  background-position: 100% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 60vh;
+}
+
+.column.background-image2 {
+  overflow: visible;
+  background-image: url("/img/anya-taylor-joy-olga-of-the-birch-forest-the-northman.jpg");
+  background-position: 100% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 60vh;
+}
+
+.column.background-image3 {
+  overflow: visible;
+  background-image: url("/img/sabrina-carpenter-3840x2160-11251.jpg");
+  background-position: 100% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 60vh;
+}
+
+
+@media screen and (max-width: 767px) {
+  .column.background-image {
+    width: 100%;
+    flex: 0 1 auto;
+    min-height: 40vh;
+  }
+}
+
+/* Columna contenido oscura */
+.column._100vh {
+  display: flex;
+  overflow: visible;
+  width: 50%;
+  min-height: 100vh;
+  padding-right: 10vw;
+  padding-left: 15vw;
+  align-items: center;
+  flex: 0 0 auto;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+}
+
+.column._100vh:hover {
+  background-color: rgba(0, 0, 0, 0.75);
+  opacity: 1;
+}
+
+@media screen and (max-width: 991px) {
+  .column._100vh {
+    width: auto;
+    padding-right: 5vw;
+    padding-left: 5vw;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .column._100vh {
+    width: 100%;
+    min-height: auto;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .column._100vh {
+    padding: 60px 40px;
+  }
+}
+
+/* ─── PROJECT INFO ──────────────────────────────────────────────── */
+.project-info {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 991px) {
+  .project-info {
+    width: 100%;
+    padding: 10vh 5vw;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .project-info {
+    padding: 0;
+  }
+}
+
+/* ─── NUMBER ────────────────────────────────────────────────────── */
+.number {
+  position: relative;
+  margin-bottom: 0;
+  margin-left: 0;
+  float: none;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  color: grey;
+  font-size: 70px;
+  line-height: 60px;
+  font-weight: 400;
+}
+
+/* ─── PROJECT TITLE ─────────────────────────────────────────────── */
+.project-title {
+  font-size: 44px;
+  color: white;
+  margin-top: 16px;
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+
+/* ─── PROJECT DESCRIPTION ───────────────────────────────────────── */
+.project-description {
+  color: rgb(122, 122, 122);
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* ─── PROJECT LINK ──────────────────────────────────────────────── */
+.project-link {
+  box-shadow: rgba(255, 255, 255, 0.2) 0px -2px 0px 0px inset;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding-bottom: 2px;
+  transition: box-shadow 0.2s ease;
+}
+
+.project-link:hover {
+  box-shadow: white 0px -2px 0px 0px inset;
+}
+
+/* ─── FOOTER ────────────────────────────────────────────────────── */
+.footer {
+  position: relative;
+  z-index: 10;
+  background-color: black;
+  padding: 30px 0;
+}
+
+.footer_grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 16px;
+  row-gap: 16px;
+  align-items: flex-start;
+}
+
+.footer_links_item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ─── RESPONSIVE HERO ───────────────────────────────────────────── */
+@media screen and (max-width: 991px) {
+
+  .hero {
+    justify-content: flex-start;
+    padding-left: 0;
+  }
+  .wrapper-title {
+    width: 100vw;
+  }
+  .main-h1 {
+    font-size: 84px;
+    line-height: 80px;
+  }
+  .main-h1.home {
+    font-size: 18vh;
+    line-height: 15vh;
+  }
+  .home-subhead {
+    width: 50vw;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .hero {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+  .main-h1 {
+    font-size: 50px;
+    line-height: 50px;
+  }
+  .main-h1.home {
+    font-size: 8vh;
+    line-height: 8vh;
+  }
+  .home-subhead {
+    width: auto;
+  }
+  .footer_grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .footer_links_item {
+    align-items: center;
+  }
+}
