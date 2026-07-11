@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portafolio Sebas</title>
+  <title>Sebas — Ingeniero · Portafolio</title>
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,500&f[]=satoshi@400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -11,121 +18,154 @@
 
   <!-- NAVBAR -->
   <nav class="navbar">
-    <div class="u-container-full">
-      <div class="nav_links_link">
-        <div class="nav_links_item">
-          <a href="index.html" class="label-g text-grey">Trabajo Seleccionado</a>
-           <div class="nav-line"></div>
-        </div>
-        <div class="nav_links_item">
-          <a href="/html/AcercaDe.html" class="label-g text-grey">Acerca de</a>
-           <div class="nav-line"></div>
-        </div>
-        <div class="nav_links_item">
-          <a href="/html/Contacto.html" class="label-g text-grey">Contacto</a>
-             <div class="nav-line"></div>
-        </div>
-      </div>
+    <a href="index.html" class="nav-logo mono">SEBAS<span class="accent">.</span>ENG</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link mono">Selected Work</a>
+      <a href="/html/AcercaDe.html" class="nav-link mono">About</a>
+      <a href="/html/Contacto.html" class="nav-link mono">Contact</a>
     </div>
   </nav>
 
-  <!-- MAIN -->
   <main class="main-content">
 
-    <!-- HERO (fixed) -->
+    <!-- HERO (fixed, con retícula técnica) -->
     <section class="hero">
-      <div class="wrapper-title">
-        <div class="w-h1">
-          <h1 class="main-h1 home">Hello,</h1>
-        </div>
-        <div class="w-h1">
-          <h1 class="main-h1 home">Sebas.</h1>
-        </div>
-        <div class="home-subhead">
-          <p>Hola, mundo</p>
-        </div>
+      <div class="hero-grid" aria-hidden="true"></div>
+
+      <!-- Crosshairs decorativos -->
+      <span class="crosshair ch-tl" aria-hidden="true">+</span>
+      <span class="crosshair ch-tr" aria-hidden="true">+</span>
+      <span class="crosshair ch-bl" aria-hidden="true">+</span>
+
+      <div class="hero-inner">
+        <p class="hero-eyebrow mono reveal">PORTFOLIO — 2026 · MAZATLÁN, MX</p>
+        <h1 class="hero-title">
+          <span class="line reveal d1">SEBAS</span>
+          <span class="line outline reveal d2">ENGINEER</span>
+        </h1>
+        <p class="hero-sub reveal d3">
+          Diseño y construyo experiencias web con precisión de ingeniería
+          y atención obsesiva al detalle.
+        </p>
       </div>
 
-      <!-- Flecha scroll -->
-      <div class="arrow">
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 4V26M15 26L5 16M15 26L25 16" stroke="rgb(145,145,145)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <!-- Title block: firma visual estilo plano técnico -->
+      <div class="title-block mono reveal d3" aria-hidden="true">
+        <div class="tb-row"><span>PROJECT</span><span>PERSONAL PORTFOLIO</span></div>
+        <div class="tb-row"><span>ENG.</span><span>SEBAS</span></div>
+        <div class="tb-row"><span>REV.</span><span>2.0 — 2026.07</span></div>
+        <div class="tb-row"><span>SCALE</span><span>1 : 1</span></div>
+        <div class="tb-row"><span>SHEET</span><span>01 / 01</span></div>
       </div>
+
+      <!-- Indicador de scroll -->
+      <div class="scroll-hint mono" aria-hidden="true">
+        <span>SCROLL</span>
+        <div class="scroll-line"></div>
+      </div>
+
+      <!-- Coordenadas del cursor -->
+      <div class="coords mono" id="coords" aria-hidden="true">X:0000 Y:0000</div>
     </section>
 
-    <!-- Spacer: hace que la sección de proyectos empiece después del hero -->
+    <!-- Spacer: los proyectos entran deslizándose sobre el hero -->
     <div class="hero-spacer"></div>
 
-    <!-- PROYECTOS -->
-    <section class="section main">
-      <div class="collection-list-wrapper">
-        <ul class="collection-list">
+    <!-- PROYECTOS (papel de dibujo claro) -->
+    <section class="section-work">
+      <header class="work-header">
+        <h2 class="work-title">Selected Work</h2>
+        <span class="work-count mono">/// 03 PROJECTS</span>
+      </header>
 
-          <!-- Proyecto 1 -->
-          <li>
-            <div class="wrapper">
-              <div class="column _100vh">
-                <div class="project-info">
-                  <h2 class="project-title">Project Title</h2>
-                  <p class="project-description">Short description of the project goes here.</p>
-                  <a href="#" class="project-link">View project →</a>
-                </div>
-              </div>
-              <div class="column background-image1"></div>
+      <ul class="project-list">
+
+        <!-- Proyecto 1 -->
+        <li class="project fade-up">
+          <div class="project-meta mono">
+            <span class="p-index">P—01</span>
+            <span>WEB DESIGN · 2026</span>
+          </div>
+          <div class="project-body">
+            <div class="project-info">
+              <h3 class="project-title">Adriaan Kircher</h3>
+              <p class="project-description">
+                Short description of the project goes here.
+              </p>
+              <a href="https://www.adriaankirchner.com/" class="project-link mono" target="_blank" rel="noopener">
+                VIEW PROJECT <span class="arrow">↗</span>
+              </a>
             </div>
-          </li>
+            <figure class="project-frame">
+              <img src="img/adriaan-kircher.png" alt="Sitio web de Adriaan Kircher">
+            </figure>
+          </div>
+        </li>
 
-          <!-- Proyecto 2 -->
-          <li>
-            <div class="wrapper">
-              <div class="column _100vh">
-                <div class="project-info">
-                  <h2 class="project-title">Another Project</h2>
-                  <p class="project-description">Another short description of the project.</p>
-                  <a href="#" class="project-link">View project →</a>
-                </div>
-              </div>
-              <div class="column background-image2"></div>
+        <!-- Proyecto 2 -->
+        <li class="project fade-up">
+          <div class="project-meta mono">
+            <span class="p-index">P—02</span>
+            <span>WEB DESIGN · 2026</span>
+          </div>
+          <div class="project-body reversed">
+            <div class="project-info">
+              <h3 class="project-title">Pulse Agency</h3>
+              <p class="project-description">
+                Another short description of the project.
+              </p>
+              <a href="https://pulse-agency-staging.webflow.io/" class="project-link mono" target="_blank" rel="noopener">
+                VIEW PROJECT <span class="arrow">↗</span>
+              </a>
             </div>
-          </li>
+            <figure class="project-frame">
+              <img src="img/pulse-agency.png" alt="Sitio web de Pulse Agency">
+            </figure>
+          </div>
+        </li>
 
-          <!-- Proyecto 3 -->
-          <li>
-            <div class="wrapper">
-              <div class="column _100vh">
-                <div class="project-info">
-                  <h2 class="project-title">Third Project</h2>
-                  <p class="project-description">Description for the third listed project.</p>
-                  <a href="#" class="project-link">View project →</a>
-                </div>
-              </div>
-              <div class="column background-image3"></div>
+        <!-- Proyecto 3 -->
+        <li class="project fade-up">
+          <div class="project-meta mono">
+            <span class="p-index">P—03</span>
+            <span>IN PROGRESS · 2026</span>
+          </div>
+          <div class="project-body">
+            <div class="project-info">
+              <h3 class="project-title">Third Project</h3>
+              <p class="project-description">
+                Description for the third listed project.
+              </p>
+              <a href="#" class="project-link mono">
+                VIEW PROJECT <span class="arrow">↗</span>
+              </a>
             </div>
-          </li>
+            <!-- Cuando tengas la imagen: pon el src y quita la clase "empty" -->
+            <figure class="project-frame empty">
+              <span class="mono">IMG — PENDING</span>
+            </figure>
+          </div>
+        </li>
 
-        </ul>
-      </div>
+      </ul>
     </section>
 
   </main>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="u-container-full">
-      <div class="footer_grid">
-        <div class="footer_links_item">
-          <a href="index.html" class="label-g text-grey">Inicio</a>
-        </div>
-        <div class="footer_links_item">
-          <a href="/html/AcercaDe.html" class="label-g text-grey">Acerca de</a>
-        </div>
-        <div class="footer_links_item">
-          <a href="/html/Contacto.html" class="label-g text-grey">Contacto</a>
-        </div>
-      </div>
+    <a href="/html/Contacto.html" class="footer-cta">
+      Let's build<span class="accent"> something</span> <span class="arrow">↗</span>
+    </a>
+    <div class="footer-bottom mono">
+      <a href="index.html">HOME</a>
+      <a href="/html/AcercaDe.html">ABOUT</a>
+      <a href="/html/Contacto.html">CONTACT</a>
+      <span class="footer-note">© 2026 SEBAS — 23.24°N 106.41°W</span>
     </div>
   </footer>
+
+  <script src="js/script.js"></script>
 
 </body>
 </html>
