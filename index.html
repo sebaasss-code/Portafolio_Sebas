@@ -16,11 +16,13 @@
 
 <body>
 
+  <div class="noise" aria-hidden="true"></div>
+
   <!-- NAVBAR -->
   <nav class="navbar">
     <a href="index.html" class="nav-logo mono">SEBAS<span class="accent">.</span>ENG</a>
     <div class="nav-links">
-      <a href="index.html" class="nav-link mono">Selected Work</a>
+      <a href="#work" class="nav-link mono">Work</a>
       <a href="/html/AcercaDe.html" class="nav-link mono">About</a>
       <a href="/html/Contacto.html" class="nav-link mono">Contact</a>
     </div>
@@ -28,54 +30,35 @@
 
   <main class="main-content">
 
-    <!-- HERO (fixed, con retícula técnica) -->
+    <!-- HERO (fixed, composición asimétrica tipo cartel) -->
     <section class="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-grid" aria-hidden="true"></div>
 
-      <!-- Crosshairs decorativos -->
-      <span class="crosshair ch-tl" aria-hidden="true">+</span>
-      <span class="crosshair ch-tr" aria-hidden="true">+</span>
-      <span class="crosshair ch-bl" aria-hidden="true">+</span>
+      <div class="hero-sign mono" aria-hidden="true">EST. 2026 — 23.24°N 106.41°W</div>
 
       <div class="hero-inner">
-        <p class="hero-eyebrow mono reveal">PORTFOLIO — 2026 · MAZATLÁN, MX</p>
-        <h1 class="hero-title">
-          <span class="line reveal d1">SEBAS</span>
-          <span class="line outline reveal d2">ENGINEER</span>
+        <p class="hero-eyebrow mono reveal">PORTFOLIO — MAZATLÁN, MX</p>
+        <h1 class="hero-title reveal d1">
+          Precisión de <span class="accent">ingeniería</span>,<br>hecha interfaz.
         </h1>
-        <p class="hero-sub reveal d3">
-          Diseño y construyo experiencias web con precisión de ingeniería
-          y atención obsesiva al detalle.
+        <p class="hero-sub reveal d2">
+          Sebas — frontend engineer. Construyo experiencias web rápidas
+          y cuidadas, del wireframe al deploy.
         </p>
+        <a href="#work" class="hero-cta mono reveal d3">
+          Selected Work <span class="arrow">↓</span>
+        </a>
       </div>
-
-      <!-- Title block: firma visual estilo plano técnico -->
-      <div class="title-block mono reveal d3" aria-hidden="true">
-        <div class="tb-row"><span>PROJECT</span><span>PERSONAL PORTFOLIO</span></div>
-        <div class="tb-row"><span>ENG.</span><span>SEBAS</span></div>
-        <div class="tb-row"><span>REV.</span><span>2.0 — 2026.07</span></div>
-        <div class="tb-row"><span>SCALE</span><span>1 : 1</span></div>
-        <div class="tb-row"><span>SHEET</span><span>01 / 01</span></div>
-      </div>
-
-      <!-- Indicador de scroll -->
-      <div class="scroll-hint mono" aria-hidden="true">
-        <span>SCROLL</span>
-        <div class="scroll-line"></div>
-      </div>
-
-      <!-- Coordenadas del cursor -->
-      <div class="coords mono" id="coords" aria-hidden="true">X:0000 Y:0000</div>
     </section>
 
     <!-- Spacer: los proyectos entran deslizándose sobre el hero -->
     <div class="hero-spacer"></div>
 
-    <!-- PROYECTOS (papel de dibujo claro) -->
-    <section class="section-work">
+    <!-- PROYECTOS -->
+    <section class="section-work" id="work">
       <header class="work-header">
         <h2 class="work-title">Selected Work</h2>
-        <span class="work-count mono">/// 03 PROJECTS</span>
       </header>
 
       <ul class="project-list">
@@ -88,16 +71,17 @@
           </div>
           <div class="project-body">
             <div class="project-info">
-              <h3 class="project-title">Adriaan Kircher</h3>
+              <h3 class="project-title">Adriaan Kirchner</h3>
               <p class="project-description">
-                Short description of the project goes here.
+                Sitio de portafolio para un director de fotografía de Los Ángeles
+                — grid minimalista de trabajo audiovisual para marcas y artistas.
               </p>
               <a href="https://www.adriaankirchner.com/" class="project-link mono" target="_blank" rel="noopener">
                 VIEW PROJECT <span class="arrow">↗</span>
               </a>
             </div>
             <figure class="project-frame">
-              <img src="img/adriaan-kircher.png" alt="Sitio web de Adriaan Kircher">
+              <img src="img/adriaan-kircher.webp" alt="Sitio web de Adriaan Kirchner" loading="lazy" width="1917" height="867">
             </figure>
           </div>
         </li>
@@ -112,14 +96,15 @@
             <div class="project-info">
               <h3 class="project-title">Pulse Agency</h3>
               <p class="project-description">
-                Another short description of the project.
+                Sitio para una agencia de styling y representación de atletas
+                — carrusel editorial de fotografía y navegación minimalista.
               </p>
               <a href="https://pulse-agency-staging.webflow.io/" class="project-link mono" target="_blank" rel="noopener">
                 VIEW PROJECT <span class="arrow">↗</span>
               </a>
             </div>
             <figure class="project-frame">
-              <img src="img/pulse-agency.png" alt="Sitio web de Pulse Agency">
+              <img src="img/pulse-agency.webp" alt="Sitio web de Pulse Agency" loading="lazy" width="1917" height="865">
             </figure>
           </div>
         </li>
@@ -132,13 +117,11 @@
           </div>
           <div class="project-body">
             <div class="project-info">
-              <h3 class="project-title">Third Project</h3>
+              <h3 class="project-title">Next Project</h3>
               <p class="project-description">
-                Description for the third listed project.
+                Nuevo trabajo en desarrollo — vuelve pronto para verlo.
               </p>
-              <a href="#" class="project-link mono">
-                VIEW PROJECT <span class="arrow">↗</span>
-              </a>
+              <span class="project-status mono">COMING SOON</span>
             </div>
             <!-- Cuando tengas la imagen: pon el src y quita la clase "empty" -->
             <figure class="project-frame empty">
