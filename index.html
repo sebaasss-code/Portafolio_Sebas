@@ -11,12 +11,18 @@
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,500&f[]=satoshi@400,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20260817">
 </head>
 
 <body>
 
   <div class="noise" aria-hidden="true"></div>
+
+  <!-- Cursor personalizado (desktop) -->
+  <div class="cursor" data-cursor-root aria-hidden="true">
+    <span class="cursor-dot"></span>
+    <span class="cursor-ring"></span>
+  </div>
 
   <!-- NAVBAR -->
   <nav class="navbar">
@@ -39,14 +45,14 @@
 
       <div class="hero-inner">
         <p class="hero-eyebrow mono reveal">PORTFOLIO — MAZATLÁN, MX</p>
-        <h1 class="hero-title reveal d1">
-          Precisión de <span class="accent">ingeniería</span>,<br>hecha interfaz.
+        <h1 class="hero-title reveal d1" data-split="words">
+          Sebas <span class="accent">frontend</span> engineer.
         </h1>
         <p class="hero-sub reveal d2">
-          Sebas — frontend engineer. Construyo experiencias web rápidas
+          Construyo experiencias web rápidas
           y cuidadas, del wireframe al deploy.
         </p>
-        <a href="#work" class="hero-cta mono reveal d3">
+        <a href="#work" class="hero-cta mono reveal d3" data-magnetic data-magnetic-strength="0.25">
           Selected Work <span class="arrow">↓</span>
         </a>
       </div>
@@ -137,7 +143,7 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <a href="/html/Contacto.html" class="footer-cta">
+    <a href="/html/Contacto.html" class="footer-cta" data-magnetic data-magnetic-strength="0.15">
       Let's build<span class="accent"> something</span> <span class="arrow">↗</span>
     </a>
     <div class="footer-bottom mono">
@@ -148,7 +154,7 @@
     </div>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script src="js/script.js?v=20260817" defer></script>
 
 </body>
 </html>

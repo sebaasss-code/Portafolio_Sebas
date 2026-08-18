@@ -66,6 +66,76 @@ a { text-decoration: none; color: inherit; }
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
+/* ─── CURSOR PERSONALIZADO (solo desktop, hover fino) ──────────────── */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+  mix-blend-mode: difference;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.cursor.is-ready { opacity: 1; }
+
+@media (hover: hover) and (pointer: fine) {
+  .cursor { display: block; }
+  .has-cursor, .has-cursor a, .has-cursor button { cursor: none; }
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 5px;
+  height: 5px;
+  margin: -2.5px;
+  background: var(--white);
+  border-radius: 50%;
+}
+
+.cursor-ring {
+  width: 32px;
+  height: 32px;
+  margin: -16px;
+  border: 1px solid var(--white);
+  border-radius: 50%;
+  transition: width 0.35s ease, height 0.35s ease, margin 0.35s ease, border-color 0.35s ease;
+}
+
+.cursor.is-interactive .cursor-ring {
+  width: 52px;
+  height: 52px;
+  margin: -26px;
+  border-color: var(--accent);
+}
+
+/* ─── BOTONES MAGNÉTICOS ────────────────────────────────────────── */
+.has-magnetic {
+  display: inline-flex;
+  position: relative;
+  isolation: isolate;
+}
+
+.magnetic-inner {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: inherit;
+  will-change: transform;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 /* ─── NAVBAR ────────────────────────────────────────────────────── */
 .navbar {
   position: fixed;
@@ -134,22 +204,27 @@ a:focus-visible {
   background: var(--bg);
 }
 
-/* Resplandor de acento, ambiental, no repetitivo ni saturado */
+/* Mesh gradient animado — resplandor de acento ambiental, nunca saturado */
+@property --mesh-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@property --mesh-x     { syntax: "<percentage>"; inherits: false; initial-value: 30%; }
+@property --mesh-y     { syntax: "<percentage>"; inherits: false; initial-value: 40%; }
+
 .hero-glow {
   position: absolute;
-  top: -20%;
-  right: -10%;
-  width: min(60vw, 900px);
-  height: min(60vw, 900px);
-  background: radial-gradient(circle, var(--accent-soft) 0%, transparent 68%);
-  filter: blur(20px);
+  inset: -20% -10% -10% -10%;
   pointer-events: none;
-  animation: glow-drift 16s ease-in-out infinite alternate;
+  background:
+    radial-gradient(42% 38% at var(--mesh-x) var(--mesh-y), var(--accent-soft) 0%, transparent 70%),
+    conic-gradient(from var(--mesh-angle), rgba(61, 92, 255, 0.14), transparent 30%, rgba(154, 160, 172, 0.08), transparent 70%, rgba(61, 92, 255, 0.14));
+  filter: blur(70px) saturate(120%);
+  mix-blend-mode: screen;
+  animation: mesh-shift 24s linear infinite;
 }
 
-@keyframes glow-drift {
-  from { transform: translate(0, 0) scale(1); }
-  to   { transform: translate(-4%, 5%) scale(1.08); }
+@keyframes mesh-shift {
+  0%   { --mesh-angle: 0deg;   --mesh-x: 30%; --mesh-y: 38%; }
+  50%  { --mesh-angle: 180deg; --mesh-x: 68%; --mesh-y: 58%; }
+  100% { --mesh-angle: 360deg; --mesh-x: 30%; --mesh-y: 38%; }
 }
 
 /* Retícula técnica, muy tenue: textura, no protagonista */
@@ -238,6 +313,27 @@ a:focus-visible {
 
 @keyframes reveal-up {
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Defensiva: un elemento con .reveal Y data-split nunca debe quedar invisible
+   si el reveal-word JS falla o carga una versión cacheada vieja. */
+.reveal[data-split] {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+/* Split-text: reveal por palabras (usado en hero-title) */
+.split-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.55em);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.split-word.is-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ─── HERO SPACER ───────────────────────────────────────────────── */
@@ -358,8 +454,29 @@ a:focus-visible {
   border-radius: var(--radius);
   background: var(--bg);
   overflow: hidden;
-  transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  isolation: isolate;
+  --rx: 0deg;
+  --ry: 0deg;
+  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style: preserve-3d;
+  transition: border-color 0.3s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+.project-frame.has-tilt:hover { transition-duration: 0.15s; }
+
+/* Halo que sigue al cursor sobre la tarjeta */
+.project-frame .frame-halo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), var(--accent-soft), transparent 62%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  mix-blend-mode: screen;
+}
+
+.project-frame:hover .frame-halo { opacity: 1; }
 
 .project-frame img {
   display: block;
@@ -476,19 +593,168 @@ a:focus-visible {
 
 .footer-note { margin-left: auto; }
 
+/* ─── PAGE HERO (About / Contact) ───────────────────────────────── */
+.page-hero {
+  position: relative;
+  padding: clamp(9rem, 20vh, 12rem) clamp(1.5rem, 6vw, 7rem) clamp(3rem, 7vh, 5rem);
+  /* Sin overflow:hidden — el mesh gradient necesita desbordarse y desvanecer
+     suavemente en los bordes (ver gotcha B.6). El overflow-x:hidden global
+     en html/body ya evita el scroll horizontal. */
+  isolation: isolate;
+}
+
+.page-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  max-width: 16ch;
+}
+
+.page-hero .hero-sub {
+  margin-top: 1.6rem;
+}
+
+/* ─── ABOUT ─────────────────────────────────────────────────────── */
+.about-body {
+  position: relative;
+  z-index: 10;
+  background-color: var(--bg-raised);
+  padding: clamp(3rem, 8vh, 6rem) clamp(1.5rem, 6vw, 7rem) clamp(5rem, 10vh, 8rem);
+  border-top: 1px solid var(--line);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(240px, 3fr) 5fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.about-photo {
+  aspect-ratio: 4 / 5;
+  min-height: 280px;
+}
+
+.about-text p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--steel);
+  max-width: 58ch;
+}
+
+.about-text p + p { margin-top: 1.2rem; }
+
+.about-note {
+  margin-top: 1.5rem;
+  color: var(--cream-3, var(--steel));
+  opacity: 0.7;
+}
+
+.stack-section {
+  margin-top: clamp(3rem, 7vh, 5rem);
+  padding-top: clamp(2.5rem, 6vh, 4rem);
+  border-top: 1px solid var(--line-soft);
+}
+
+.stack-label {
+  color: var(--steel);
+  margin-bottom: 1.4rem;
+}
+
+.stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  list-style: none;
+}
+
+.stack-tags li {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.stack-tags li:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ─── CONTACT ───────────────────────────────────────────────────── */
+.contact-body {
+  position: relative;
+  z-index: 10;
+  background-color: var(--bg-raised);
+  padding: clamp(3rem, 9vh, 6rem) clamp(1.5rem, 6vw, 7rem) clamp(6rem, 12vh, 9rem);
+  border-top: 1px solid var(--line);
+}
+
+.contact-email {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 5.5vw, 3.6rem);
+  line-height: 1.1;
+  color: var(--white);
+  word-break: break-word;
+  transition: color 0.25s ease;
+}
+
+.contact-email:hover { color: var(--accent); }
+.contact-email:hover .arrow { transform: translate(6px, -6px); }
+.contact-email .arrow { display: inline-block; transition: transform 0.25s ease; }
+
+.contact-note {
+  margin-top: 1.4rem;
+  color: var(--steel);
+  max-width: 46ch;
+  line-height: 1.65;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: clamp(3rem, 7vh, 4.5rem);
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--line);
+}
+
+.social-links a {
+  color: var(--steel);
+  transition: color 0.25s ease;
+}
+
+.social-links a:hover { color: var(--white); }
+
 /* ─── ACCESIBILIDAD: reduce motion ──────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 
   .reveal,
-  .fade-up {
+  .fade-up,
+  .split-word {
     opacity: 1;
     transform: none;
     animation: none;
     transition: none;
   }
 
-  .hero-glow { animation: none; }
+  /* El mesh gradient y el tilt/halo se mantienen: son ambientales,
+     no intrusivos — apagarlos deja la web plana en Windows, donde
+     reduced-motion suele venir activado por defecto de fábrica. */
 }
 
 /* ─── RESPONSIVE ────────────────────────────────────────────────── */
@@ -507,6 +773,9 @@ a:focus-visible {
   .project-body.reversed .project-info { order: 2; }
 
   .hero-sign { display: none; }
+
+  .about-grid { grid-template-columns: 1fr; }
+  .about-photo { aspect-ratio: 16 / 10; }
 }
 
 @media screen and (max-width: 560px) {
@@ -538,4 +807,8 @@ a:focus-visible {
     margin-left: 0;
     width: 100%;
   }
+
+  .page-hero { padding-left: 1.2rem; padding-right: 1.2rem; }
+  .about-body,
+  .contact-body { padding-left: 1.2rem; padding-right: 1.2rem; }
 }
